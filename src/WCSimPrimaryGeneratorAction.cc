@@ -28,6 +28,8 @@
 #include "G4TransportationManager.hh"
 #include "G4UImanager.hh"
 
+#include "ConditionalDT.hh"
+
 // GENIE headers
 #ifndef NO_GENIE
 #include "Framework/GHEP/GHepParticle.h"
@@ -749,12 +751,25 @@ void WCSimPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		// Now read the outgoing particles: These we will simulate
 		// =======================================================
 		//G4cout<<"Looping over primaries"<<G4endl;
+		//Before let's test adding a dt from G4BNB from Marvin
+		static ConditionalDT cond("conditional_prob.root", "h_cond");
+                if (!cond.isValid()) {
+                        G4Exception("WCSimPrimaryGeneratorAction", "BNBTime001", FatalException,
+                        "Could not load conditional Delta_t map");
+                }
+                //G4double Enu_GeV = probeenergy / GeV;
+                //double dt_ns = cond.dt_sample(Enu_GeV);
+                //G4double dt = dt_ns * ns;
+                //G4cout << "BNB timing: Enu=" << Enu_GeV << " GeV  dt=" << dt/ns << " ns" << G4endl;
+
 		for(int i=0;i<ntankbranchval;i++){
 			//G4cout<<"Loading details of primary "<<i<<G4endl;
 			vtxxval=vtxxbranchval[i]*CLHEP::cm;
 			vtxyval=vtxybranchval[i]*CLHEP::cm;
 			vtxzval=vtxzbranchval[i]*CLHEP::cm;
 			vtxtval=vtxtbranchval[i]*CLHEP::ns;
+			//vtxtval=vtxtbranchval[i]*CLHEP::ns + dt;
+                        //G4cout<<"vtxtval: " << (vtxtval - dt) << ", dt: " << dt << G4endl; 
 			pxval=pxbranchval[i]*GeV;
 			pyval=pybranchval[i]*GeV;
 			pzval=pzbranchval[i]*GeV;

@@ -31,6 +31,7 @@
 //#include "GdCaptureGammas_ggarnet.hh"
 //#include "GdCaptureGammas_glg4sim.hh"
 #include "DrawMessage.hh"
+#include <cstdlib>
 
 // Forward declaration
 namespace ANNRIGdGammaSpecModel { class ANNRIGd_GdNCaptureGammaGenerator; }
@@ -59,8 +60,12 @@ class GdNeutronHPCaptureFSANNRI : public G4NeutronHPFinalState
 
 		G4int    Gd_CAPTURE; //1:natural , 2:enriched 157Gd, 3:enriched 155Gd
 		G4int    Gd_CASCADE; //1:discrete + continuum; 2:discrete, 3:continuum
-		G4String Gd157_ROOTFile="../WCSim/cont_dat/158GdContTbl__E1SLO4__HFB.root";
-		G4String Gd155_ROOTFile="../WCSim/cont_dat/156GdContTbl__E1SLO4__HFB.root";
+
+		G4String Gd157_ROOTFile = "";
+		G4String Gd155_ROOTFile = "";
+
+		//G4String Gd157_ROOTFile="../WCSim/cont_dat/158GdContTbl__E1SLO4__HFB.root";
+		//G4String Gd155_ROOTFile="../WCSim/cont_dat/156GdContTbl__E1SLO4__HFB.root";
 
 		G4Fragment * nucleus;
 

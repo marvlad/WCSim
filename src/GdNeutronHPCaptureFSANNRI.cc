@@ -39,8 +39,21 @@ nucleus(0), theTwo(0), targetMass(0)
 	Gd_CAPTURE = _gdcapture;
 	Gd_CASCADE = _gdcascade;
 	hasXsec = false;
+
+	const char* wcsim_dir = std::getenv("WCSIM_DIR");
+	if (G4String(wcsim_dir).empty()) {
+	  G4Exception("GdNeutronHPCaptureFSANNRI",
+	              "WCSIM_DIR_NOT_SET",
+	              FatalException,
+		      "WCSIM_DIR is not set. Please: export WCSIM_DIR=/path/to/WCSim");
+	}
+
+	Gd157_ROOTFile = G4String(wcsim_dir) + "/cont_dat/158GdContTbl__E1SLO4__HFB.root";
+	Gd155_ROOTFile = G4String(wcsim_dir) + "/cont_dat/156GdContTbl__E1SLO4__HFB.root";
+
 	//if(MODEL == 4 and not sAnnriGammaGen) InitANNRIGdGenerator();
 	if(not sAnnriGammaGen) InitANNRIGdGenerator();
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
