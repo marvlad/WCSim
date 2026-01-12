@@ -204,6 +204,7 @@ set(WCSIM_SCRIPTS
   macros/primaries_directory.mac
   macros/setRandomParameters.mac
   pulsecharacteristics.root
+  conditional_prob.root
   PHASE2_INNER_STRUCTURE.gdml
   geniedirectory.txt
   dirtdirectory.txt
